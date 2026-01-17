@@ -8,7 +8,9 @@
     <script src="asset/js/script.js" defer></script>
 </head>
 <body>
-    <header>Flow FX Currency Converter</header>
+    <!--application title and accessible theme toggle button-->
+    <header class="header">
+        <h1>FX Currency Converter</h1> 
         <nav aria-label="Theme controls">
     <button id="themeToggle"    
     aria-label="Toggle dark or light theme"
@@ -18,6 +20,59 @@
         </nav>
 </header>
 
-</body>
+<main class="container">
+    <section class="card"
+        aria-labelledby="converter-title">
+    <h2 id="converter-title">Currency Converter</h2>
+    <form id="converter-Form"
+    <label for ="amount">Amount</label>
+    <input type="number" 
+        id="amount" 
+        name="amount" 
+        min="0"
+        step="any"
+        required
+        />
+    <label for="fromCurrency">From Currency</label>
+    <select id="fromCurrency" name="fromCurrency" required>
+        <option value="" disabled selected>Select currency</option>
+<button type="button" 
+        id="swapBtn" 
+        class="swapBtn"
+        aria-label="Swap From and To currencies">
+          Swap
+    </section>
+    <label for="toCurrency">To Currency</label>
+    <select id="toCurrency" name="toCurrency" required>
+        <option value="" disabled selected>Select currency</option>
+    </select>
+    <button type="submit" class="primary-btn">
+        Convert
+    </button>
+    </form>
 
+    <section
+        id="resultSection"
+        class="card result-section"
+        aria-live="polite"
+        aria-atomic="true"
+        >
+        <h2>Conversion Result</h2>
+        <p id="resultText">Please enter an amount and select currencies to convert.</p>
+    </section>
+    <!--this section adds external API attribution-->
+<footer class="footer">
+    <p>
+      Exchange rate data provided by the
+      <a
+        href="https://www.frankfurter.app"
+        target="_blank"
+        rel="noopener"
+      >
+        Frankfurter API
+      </a>
+    </p>
+  </footer>
+</main>
+</body>
 </html>
