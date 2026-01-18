@@ -38,7 +38,7 @@ function isVialidInput(amount, from , to) {
     if (from === to) return false;
     return true;
 }
-/* this section impliments currency conversion logic */
+/* this section implements currency conversion logic */
 async function convertCurrency(amount, from, to) {
     try  {
         const response = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`);
@@ -48,4 +48,15 @@ async function convertCurrency(amount, from, to) {
     catch {
         showError("Exchange rate unavailable. Please try again later");
     }
+}
+
+/* update UI with result and error */
+function displayResult(amount, from, to, converted) {
+  resultDiv.classList.remove("error");
+  resultDiv.textContent = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
+}
+
+function showError(message) {
+  resultDiv.classList.add("error");
+  resultDiv.textContent = message;
 }
