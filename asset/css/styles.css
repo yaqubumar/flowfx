@@ -38,3 +38,26 @@ body {
     justify-content: center;
     padding: 1rem;
 }
+/*create card component for UI layout */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    max-width: 420px;
+    width: 100%;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+labeel {
+    font-weight: 600;
+}
+input,
+sellect,
+button {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
