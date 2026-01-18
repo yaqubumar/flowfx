@@ -32,3 +32,9 @@ function setDefaults() {
     fromSelect.value = 'USD';
     toSelect.value = 'EUR';
 }
+/* validate user input and show error messages */
+function isVialidInput(amount, from , to) {
+    if (!amount || amount <= 0) return false;
+    if (from === to) return false;
+    return true;
+}
