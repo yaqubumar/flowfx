@@ -27,4 +27,8 @@ async function convertCurrency(amount, fromCurrency, toCurrency) {
             showError("Unable to load currency data. Please try again later.");
     }
         }
-
+/* function to set currency options in select elements */
+function setDefaults() {
+    fromSelect.value = 'USD';
+    toSelect.value = 'EUR';
+}
