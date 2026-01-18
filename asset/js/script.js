@@ -1,84 +1,204 @@
-/* select and store DOM elements */
+/* DOM Elements */
 const amountInput = document.getElementById('amount');
 const fromSelect = document.getElementById('fromCurrency');
 const toSelect = document.getElementById('toCurrency');
 const form = document.getElementById('converterForm');
-const resultDiv = document.getElementById('result');
+const resultInput = document.getElementById('result');
 const themeToggle = document.getElementById('themeToggle');
 const swapBtn = document.getElementById('swapBtn');
+const errorMessage = document.getElementById('errorMessage');
+const rateText = document.getElementById('rateText');
 
-/* function to set currency options in select elements */
+let currenciesList = [];
+
+/* Fetch available currencies from Frankfurter API */
+async function loadCurrencies() {
+    try {
+        const response = await fetch('https://api.frankfurter.app/currencies');
+        const data = await response.json();
+        currenciesList = Object.keys(data).sort();
+        populateCurrencySelects();
+    } catch (error) {
+        console.error('Error loading currencies:', error);
+        showError('Failed to load currency data. Please refresh the page.');
+    }
+}
+
+/* Populate currency select dropdowns */
+function populateCurrencySelects() {
+    // Clear existing options
+    fromSelect.innerHTML = '<option value="">Select currency</option>';
+    toSelect.innerHTML = '<option value="">Select currency</option>';
+
+    // Add all currencies
+    currenciesList.forEach(currency => {
+        const optionFrom = document.createElement('option');
+        optionFrom.value = currency;
+        optionFrom.textContent = currency;
+
+        const optionTo = document.createElement('option');
+        optionTo.value = currency;
+        optionTo.textContent = currency;
+
+        fromSelect.appendChild(optionFrom);
+        toSelect.appendChild(optionTo);
+    });
+
+    // Set defaults
+    setDefaults();
+}
+
+/* Set default currencies */
 function setDefaults() {
     fromSelect.value = 'USD';
     toSelect.value = 'EUR';
 }
-/* validate user input and show error messages */
-function isValidInput(amount, from , to) {
-    if (!amount || amount <= 0) return false;
+
+/* Validate user input */
+function isValidInput(amount, from, to) {
+    if (!amount || isNaN(amount) || amount <= 0) return false;
+    if (!from || !to) return false;
     if (from === to) return false;
     return true;
 }
-/* this section implements currency conversion logic */
-async function convertCurrency(amount, from, to) {
-    try  {
-        const response = await fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`);
-        const data = await response.json();
-        return data.rates[to];
-    }
-    catch {
-        showError("Exchange rate unavailable. Please try again later");
-    }
+
+/* Clear error message */
+function clearError() {
+    errorMessage.textContent = '';
+    errorMessage.classList.remove('error');
 }
 
-/* update UI with result and error */
-function displayResult(amount, from, to, converted) {
-  resultDiv.classList.remove("error");
-  resultDiv.textContent = `${amount} ${from} = ${converted.toFixed(2)} ${to}`;
-}
-
+/* Show error message */
 function showError(message) {
-  resultDiv.classList.add("error");
-  resultDiv.textContent = message;
+    errorMessage.textContent = message;
+    errorMessage.classList.add('error');
+    resultInput.value = '';
+    rateText.textContent = 'Enter valid amounts to see the rate';
 }
-/* handle form submission */
+
+/* Perform currency conversion */
+async function convertCurrency(amount, from, to) {
+    try {
+        clearError();
+        
+        const response = await fetch(
+            `https://api.frankfurter.app/latest?amount=${amount}&from=${from}&to=${to}`
+        );
+        
+        if (!response.ok) {
+            throw new Error('Conversion failed');
+        }
+
+        const data = await response.json();
+        const converted = data.rates[to];
+        
+        if (!converted) {
+            throw new Error('Invalid conversion result');
+        }
+
+        displayResult(amount, from, to, converted);
+    } catch (error) {
+        console.error('Conversion error:', error);
+        showError('Unable to fetch exchange rate. Please try again.');
+    }
+}
+
+/* Display conversion result */
+function displayResult(amount, from, to, converted) {
+    const rate = (converted / amount).toFixed(6);
+    resultInput.value = converted.toFixed(2);
+    rateText.textContent = `1 ${from} = ${rate} ${to}`;
+}
+
+/* Handle form submission */
 function handleSubmit(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const amount = amountInput.value;
-  const from = fromSelect.value;
-  const to = toSelect.value;
+    const amount = parseFloat(amountInput.value);
+    const from = fromSelect.value;
+    const to = toSelect.value;
 
-  if (!isValidInput(amount, from, to)) {
-    showError("Please enter a valid amount and select different currencies.");
-    return;
-  }
+    if (!isValidInput(amount, from, to)) {
+        showError('Please enter a valid amount and select different currencies.');
+        return;
+    }
 
-  convertCurrency(amount, from, to);
+    convertCurrency(amount, from, to);
 }
-/* handle theme toggle */
+
+/* Handle real-time conversion as user types */
+function handleAmountChange() {
+    const amount = parseFloat(amountInput.value);
+    const from = fromSelect.value;
+    const to = toSelect.value;
+
+    if (isValidInput(amount, from, to)) {
+        convertCurrency(amount, from, to);
+    } else {
+        clearError();
+        resultInput.value = '';
+        rateText.textContent = 'Enter amount to see the rate';
+    }
+}
+
+/* Handle currency selection change */
+function handleCurrencyChange() {
+    const amount = parseFloat(amountInput.value);
+    const from = fromSelect.value;
+    const to = toSelect.value;
+
+    if (from === to) {
+        showError('Please select different currencies.');
+        return;
+    }
+
+    if (isValidInput(amount, from, to)) {
+        convertCurrency(amount, from, to);
+    } else {
+        clearError();
+        resultInput.value = '';
+        rateText.textContent = 'Enter amount to see the rate';
+    }
+}
+
+/* Handle theme toggle */
 function toggleTheme() {
-  document.body.classList.toggle("dark");
+    document.body.classList.toggle('dark');
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
 }
 
-/* handle currency swap functionality */
+/* Handle currency swap */
 function swapCurrencies() {
-  const temp = fromSelect.value;
-  fromSelect.value = toSelect.value;
-  toSelect.value = temp;
+    const temp = fromSelect.value;
+    fromSelect.value = toSelect.value;
+    toSelect.value = temp;
 
-  if (amountInput.value) {
-    convertCurrency(amountInput.value, fromSelect.value, toSelect.value);
-  }
+    const amount = parseFloat(amountInput.value);
+    if (isValidInput(amount, fromSelect.value, toSelect.value)) {
+        convertCurrency(amount, fromSelect.value, toSelect.value);
+    }
 }
-/* event listeners */
-form.addEventListener("submit", handleSubmit);
-themeToggle.addEventListener("click", toggleTheme);
-swapBtn.addEventListener("click", swapCurrencies);
 
-/* initialize application page */
+/* Load saved theme preference */
+function loadThemePreference() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark');
+    }
+}
+
+/* Event Listeners */
+form.addEventListener('submit', handleSubmit);
+amountInput.addEventListener('input', handleAmountChange);
+fromSelect.addEventListener('change', handleCurrencyChange);
+toSelect.addEventListener('change', handleCurrencyChange);
+themeToggle.addEventListener('click', toggleTheme);
+swapBtn.addEventListener('click', swapCurrencies);
+
+/* Initialize Application */
 async function init() {
-  await loadCurrencies();
-  setDefaults();
+    loadThemePreference();
+    await loadCurrencies();
 }
 
 init();
