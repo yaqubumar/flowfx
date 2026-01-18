@@ -1,0 +1,17 @@
+
+/* definf CSS variable for theming*/
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1f2933;
+  --card-bg: #f3f4f6;
+  --accent: #2563eb;
+  --error: #dc2626;
+}
+
+/*implement dark mode styles */
+body.dark {
+  --bg-color: #111827;
+  --text-color: #f9fafb;
+  --card-bg: #1f2933;
+  --accent: #60a5fa;
+}
