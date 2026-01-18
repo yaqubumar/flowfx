@@ -90,3 +90,7 @@ function swapCurrencies() {
     convertCurrency(amountInput.value, fromSelect.value, toSelect.value);
   }
 }
+/* event listeners */
+form.addEventListener("submit", handleSubmit);
+themeToggle.addEventListener("click", toggleTheme);
+swapBtn.addEventListener("click", swapCurrencies);
