@@ -61,3 +61,18 @@ button {
     padding: 0.5rem;
     font-size: 1rem;
 }
+/*define button styles and states */
+button {
+    cursor: pointer;
+    border: none
+    border-radius: 4px;
+}
+.primary-btn {
+    background-color: var(--accent);
+    color: #ffffff;
+}
+.swap-btn:hover {
+    background-color: none;
+    color: var(--accent);
+    font-weight: bold;
+}
