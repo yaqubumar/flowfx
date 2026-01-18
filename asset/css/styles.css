@@ -15,3 +15,14 @@ body.dark {
   --card-bg: #1f2933;
   --accent: #60a5fa;
 }
+/* add base layout and typography styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
