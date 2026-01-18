@@ -94,3 +94,11 @@ function swapCurrencies() {
 form.addEventListener("submit", handleSubmit);
 themeToggle.addEventListener("click", toggleTheme);
 swapBtn.addEventListener("click", swapCurrencies);
+
+/* initialize application page */
+async function init() {
+  await loadCurrencies();
+  setDefaults();
+}
+
+init();
