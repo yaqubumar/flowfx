@@ -26,3 +26,9 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
 }
+/* header and footer styles layout*/
+.header,
+.footer {
+    text-align: center;
+    padding: 1rem;
+}
