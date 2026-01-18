@@ -60,3 +60,33 @@ function showError(message) {
   resultDiv.classList.add("error");
   resultDiv.textContent = message;
 }
+/* handle form submission */
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const amount = amountInput.value;
+  const from = fromSelect.value;
+  const to = toSelect.value;
+
+  if (!isValidInput(amount, from, to)) {
+    showError("Please enter a valid amount and select different currencies.");
+    return;
+  }
+
+  convertCurrency(amount, from, to);
+}
+/* handle theme toggle */
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+}
+
+/* handle currency swap functionality */
+function swapCurrencies() {
+  const temp = fromSelect.value;
+  fromSelect.value = toSelect.value;
+  toSelect.value = temp;
+
+  if (amountInput.value) {
+    convertCurrency(amountInput.value, fromSelect.value, toSelect.value);
+  }
+}
