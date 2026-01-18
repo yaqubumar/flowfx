@@ -76,6 +76,7 @@ button {
     color: var(--accent);
     font-weight: bold;
 }
+/*result display and error styling*/
 .result
     {
         margin-top: 1rem;
@@ -84,4 +85,10 @@ button {
     }
 .error {
     color: var(--error);
+}
+/*responsive design for smaller screens */
+@media (max-width: 600px) {
+    .card {
+        padding: 1rem;
+            }
 }
