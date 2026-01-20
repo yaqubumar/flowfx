@@ -262,6 +262,15 @@ swapBtn.addEventListener('click', swapCurrencies);
 async function init() {
     loadThemePreference();
     await loadCurrencies();
+    
+    // Load default conversion on page load
+    setTimeout(() => {
+        const defaultAmount = 1000;
+        amountInput.value = defaultAmount;
+        if (fromSelect.value && toSelect.value) {
+            convertCurrency(defaultAmount, fromSelect.value, toSelect.value);
+        }
+    }, 100);
 }
 
 init();
