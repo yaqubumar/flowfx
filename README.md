@@ -159,8 +159,52 @@ Contributions are welcome! To contribute:
 
 This project is open source and available under the MIT License.
 
+## AI-Assisted Development
+
+This project was developed with the assistance of AI (GitHub Copilot). AI was instrumental in:
+
+### Code Generation & Architecture
+- Designed the responsive grid-based UI layout
+- Generated semantic HTML structure with proper accessibility attributes
+- Created modular, maintainable JavaScript functions
+- Implemented CSS variables system for theme switching
+
+### Feature Implementation
+- **Real-Time Conversion Logic** - Async/await pattern for API calls
+- **Theme Persistence** - localStorage integration for user preferences
+- **Price Comparison Table** - Dynamic table generation and population
+- **Error Handling** - Comprehensive try-catch blocks and user feedback
+- **Responsive Design** - Mobile-first CSS with media queries
+
+### Optimization & Debugging
+- Fixed syntax errors and naming inconsistencies
+- Optimized JavaScript performance with vanilla ES6+
+- Ensured cross-browser compatibility
+- Improved accessibility with ARIA labels and semantic HTML
+
+### Documentation
+- Generated comprehensive README
+- Created clear code comments
+- Structured git commit messages
+
+### How AI Was Used
+1. **Planning** - Helped define project structure and feature set
+2. **Code Review** - Identified bugs and suggested improvements
+3. **Testing** - Validated logic and edge cases
+4. **Refactoring** - Improved code quality and maintainability
+5. **Documentation** - Generated clear, helpful documentation
+
+### Human Direction
+- All major decisions and feature requests came from human input
+- Design inspiration from Wise.com was human-driven
+- Feature prioritization and refinement was human-guided
+- Final review and testing by human developer
+
+**Note:** While AI significantly accelerated development, the project maintains high code quality, accessibility standards, and follows best practices for production-ready applications.
+
 ## Acknowledgments
 
+- **GitHub Copilot** - For AI-assisted code generation and development
 - **Frankfurter API** - For providing free, reliable exchange rate data
 - **Wise.com** - Design inspiration for the user interface
 - Built with ❤️ using vanilla web technologies
