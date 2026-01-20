@@ -108,6 +108,76 @@
                 <p>Instant conversion</p>
             </div>
         </section>
+
+        <!-- Price Comparison Section -->
+        <section class="comparison-section">
+            <h2 class="section-title">Never pay hidden fees again</h2>
+            <p class="section-subtitle">See how Flow FX compares to traditional banks and payment providers</p>
+            
+            <div class="comparison-table" id="comparisonTable">
+                <div class="comparison-header">
+                    <div class="comparison-cell"></div>
+                    <div class="comparison-cell">
+                        <div class="provider-logo">💚</div>
+                        <div class="provider-name">Flow FX</div>
+                    </div>
+                    <div class="comparison-cell">
+                        <div class="provider-logo">🏦</div>
+                        <div class="provider-name">Barclays</div>
+                    </div>
+                    <div class="comparison-cell">
+                        <div class="provider-logo">🏦</div>
+                        <div class="provider-name">Santander</div>
+                    </div>
+                    <div class="comparison-cell">
+                        <div class="provider-logo">💙</div>
+                        <div class="provider-name">PayPal</div>
+                    </div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-label">Recipient gets<br><span class="sublabel">(Total after fees)</span></div>
+                    <div class="comparison-value highlight" id="flowfxRecipient">-</div>
+                    <div class="comparison-value" id="barclaysRecipient">-</div>
+                    <div class="comparison-value" id="santanderRecipient">-</div>
+                    <div class="comparison-value" id="paypalRecipient">-</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-label">Exchange rate<br><span class="sublabel" id="rateLabel">-</span></div>
+                    <div class="comparison-value highlight" id="flowfxRate">-</div>
+                    <div class="comparison-value" id="barclaysRate">-</div>
+                    <div class="comparison-value" id="santanderRate">-</div>
+                    <div class="comparison-value" id="paypalRate">-</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-label">Exchange rate markup</div>
+                    <div class="comparison-value highlight" id="flowfxMarkup">0%</div>
+                    <div class="comparison-value markup" id="barclaysMarkup">-</div>
+                    <div class="comparison-value markup" id="santanderMarkup">-</div>
+                    <div class="comparison-value markup" id="paypalMarkup">-</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-label">Transfer fee</div>
+                    <div class="comparison-value highlight" id="flowfxFee">-</div>
+                    <div class="comparison-value" id="barclaysFee">-</div>
+                    <div class="comparison-value" id="santanderFee">-</div>
+                    <div class="comparison-value" id="paypalFee">-</div>
+                </div>
+
+                <div class="comparison-row total-row">
+                    <div class="comparison-label"><strong>Total transfer cost</strong></div>
+                    <div class="comparison-value highlight" id="flowfxTotal">-</div>
+                    <div class="comparison-value cost" id="barclaysTotal">-</div>
+                    <div class="comparison-value cost" id="santanderTotal">-</div>
+                    <div class="comparison-value cost" id="paypalTotal">-</div>
+                </div>
+            </div>
+
+            <p class="comparison-note">* Comparison based on typical fees. Banks may add hidden markups to exchange rates.</p>
+        </section>
     </main>
 
     <!-- Footer -->

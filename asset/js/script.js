@@ -108,6 +108,69 @@ function displayResult(amount, from, to, converted) {
     const rate = (converted / amount).toFixed(6);
     resultInput.value = converted.toFixed(2);
     rateText.textContent = `1 ${from} = ${rate} ${to}`;
+    
+    // Update comparison table
+    updateComparisonTable(amount, from, to, converted, rate);
+}
+
+/* Update price comparison table */
+function updateComparisonTable(amount, from, to, converted, rate) {
+    // Calculate provider markups (simulated)
+    const barclaysMarkup = 0.018; // 1.8% markup
+    const santanderMarkup = 0.025; // 2.5% markup
+    const paypalMarkup = 0.041; // 4.1% markup
+    
+    // Calculate rates with markups
+    const barclaysRate = (parseFloat(rate) * (1 - barclaysMarkup)).toFixed(5);
+    const santanderRate = (parseFloat(rate) * (1 - santanderMarkup)).toFixed(5);
+    const paypalRate = (parseFloat(rate) * (1 - paypalMarkup)).toFixed(5);
+    
+    // Calculate fees (simulated)
+    const flowfxFee = amount >= 1000 ? amount * 0.0039 : 3.88; // 0.39% or min fee
+    const barclaysFee = 0; // No transfer fee but higher markup
+    const santanderFee = 0;
+    const paypalFee = amount * 0.03; // 3% fee
+    
+    // Calculate recipient gets
+    const flowfxRecipient = converted;
+    const barclaysRecipient = (amount * barclaysRate);
+    const santanderRecipient = (amount * santanderRate);
+    const paypalRecipient = ((amount - paypalFee) * paypalRate);
+    
+    // Update rate label
+    document.getElementById('rateLabel').textContent = `(1 ${from} → ${to})`;
+    
+    // Update Flow FX column
+    document.getElementById('flowfxRecipient').textContent = `${flowfxRecipient.toFixed(2)} ${to}`;
+    document.getElementById('flowfxRate').textContent = rate;
+    document.getElementById('flowfxMarkup').textContent = `0 ${from}`;
+    document.getElementById('flowfxFee').textContent = `${flowfxFee.toFixed(2)} ${from}`;
+    document.getElementById('flowfxTotal').textContent = `${flowfxFee.toFixed(2)} ${from}`;
+    
+    // Update Barclays column
+    const barclaysMarkupAmount = amount * barclaysMarkup;
+    document.getElementById('barclaysRecipient').textContent = `${barclaysRecipient.toFixed(2)} ${to}`;
+    document.getElementById('barclaysRate').textContent = barclaysRate;
+    document.getElementById('barclaysMarkup').textContent = `${barclaysMarkupAmount.toFixed(2)} ${from}`;
+    document.getElementById('barclaysFee').textContent = `${barclaysFee} ${from}`;
+    document.getElementById('barclaysTotal').textContent = `${barclaysMarkupAmount.toFixed(2)} ${from}`;
+    
+    // Update Santander column
+    const santanderMarkupAmount = amount * santanderMarkup;
+    document.getElementById('santanderRecipient').textContent = `${santanderRecipient.toFixed(2)} ${to}`;
+    document.getElementById('santanderRate').textContent = santanderRate;
+    document.getElementById('santanderMarkup').textContent = `${santanderMarkupAmount.toFixed(2)} ${from}`;
+    document.getElementById('santanderFee').textContent = `${santanderFee} ${from}`;
+    document.getElementById('santanderTotal').textContent = `${santanderMarkupAmount.toFixed(2)} ${from}`;
+    
+    // Update PayPal column
+    const paypalMarkupAmount = amount * paypalMarkup;
+    const paypalTotalCost = paypalFee + paypalMarkupAmount;
+    document.getElementById('paypalRecipient').textContent = `${paypalRecipient.toFixed(2)} ${to}`;
+    document.getElementById('paypalRate').textContent = paypalRate;
+    document.getElementById('paypalMarkup').textContent = `${paypalMarkupAmount.toFixed(2)} ${from}`;
+    document.getElementById('paypalFee').textContent = `${paypalFee.toFixed(2)} ${from}`;
+    document.getElementById('paypalTotal').textContent = `${paypalTotalCost.toFixed(2)} ${from}`;
 }
 
 /* Handle form submission */

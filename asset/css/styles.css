@@ -316,6 +316,126 @@ body {
   text-decoration: underline;
 }
 
+/* Price Comparison Section */
+.comparison-section {
+  margin: 3rem 0;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 0.5rem 0;
+  color: var(--text-color);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  margin: 0 0 2rem 0;
+}
+
+.comparison-table {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.comparison-header {
+  display: grid;
+  grid-template-columns: 200px repeat(4, 1fr);
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--card-border);
+  margin-bottom: 1rem;
+}
+
+.comparison-header .comparison-cell {
+  text-align: center;
+  font-weight: 600;
+}
+
+.provider-logo {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.provider-name {
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.comparison-row {
+  display: grid;
+  grid-template-columns: 200px repeat(4, 1fr);
+  gap: 0.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--card-border);
+  align-items: center;
+}
+
+.comparison-row:last-of-type {
+  border-bottom: none;
+}
+
+.total-row {
+  background-color: rgba(37, 99, 235, 0.05);
+  border-radius: 6px;
+  padding: 1.25rem 0;
+  margin-top: 0.5rem;
+}
+
+.comparison-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  padding-left: 0.5rem;
+}
+
+.sublabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.comparison-value {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  padding: 0.5rem;
+  border-radius: 6px;
+}
+
+.comparison-value.highlight {
+  background-color: #d4f4dd;
+  color: #166534;
+  font-weight: 700;
+}
+
+body.dark .comparison-value.highlight {
+  background-color: #166534;
+  color: #d4f4dd;
+}
+
+.comparison-value.markup {
+  color: var(--error);
+  font-size: 0.95rem;
+}
+
+.comparison-value.cost {
+  color: var(--text-secondary);
+}
+
+.comparison-note {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 1rem;
+  font-style: italic;
+}
+
 /* Responsive design */
 @media (max-width: 600px) {
   .hero-title {
@@ -341,5 +461,32 @@ body {
 
   .trust-section {
     grid-template-columns: 1fr;
+  }
+
+  .comparison-header,
+  .comparison-row {
+    grid-template-columns: 150px repeat(4, 1fr);
+    font-size: 0.85rem;
+  }
+
+  .comparison-label {
+    font-size: 0.8rem;
+  }
+
+  .comparison-value {
+    font-size: 0.9rem;
+    padding: 0.25rem;
+  }
+
+  .provider-logo {
+    font-size: 1.5rem;
+  }
+
+  .provider-name {
+    font-size: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
   }
 }
