@@ -263,9 +263,9 @@ async function init() {
     loadThemePreference();
     await loadCurrencies();
     
-    // Load default conversion on page load (1000 USD -> EUR)
+    // Load default conversion on page load (1 USD -> EUR)
     setTimeout(() => {
-        const defaultAmount = 1000;
+        const defaultAmount = 1;
         amountInput.value = defaultAmount;
         if (fromSelect.value && toSelect.value) {
             convertCurrency(defaultAmount, fromSelect.value, toSelect.value);
